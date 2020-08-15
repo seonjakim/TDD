@@ -1,9 +1,32 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+//참고자료 : https://www.youtube.com/watch?v=tX-gu6FWcsE
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+import React from "react";
+import App from "./App";
+import { shallow } from "enzyme";
+import PersonList from "./PersonList";
+
+describe("App", () => {
+  let appWrapper;
+
+  beforeAll(() => {
+    appWrapper = shallow(<App />);
+  });
+
+  it("renders a person list", () => {
+    const personList = appWrapper.find(PersonList);
+
+    expect(personList).toHaveLength(1);
+  });
+
+  it("has state", () => {
+    const appState = appWrapper.state();
+
+    expect(appState).not.toBeNull();
+  });
+
+  it("has a people property on state", () => {
+    const appState = appWrapper.state();
+
+    expect(appState.people).toBeDefined();
+  });
 });

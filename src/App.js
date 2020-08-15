@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState } from "react";
+import PersonList from "./PersonList";
 
 function App() {
+  const [people, setPeople] = useState("");
   return (
-<div></div>  );
+    <div>
+      <PersonList />
+    </div>
+  );
 }
 
 export default App;
