@@ -5,7 +5,7 @@ function App() {
   const [people, setPeople] = useState("");
   return (
     <div>
-      <PersonList />
+      <PersonList people={people} />
     </div>
   );
 }
