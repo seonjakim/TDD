@@ -1,5 +1,5 @@
 import Headline from "../headline/index";
-import checkPropTypes from "check-prop-types";
+import { checkProps } from "../../Utils/index";
 
 describe("Checking PropTypes", () => {
   it("should not throw a warning", () => {
@@ -16,12 +16,7 @@ describe("Checking PropTypes", () => {
         },
       ],
     };
-    const propsErr = checkPropTypes(
-      Headline.propTypes,
-      expectedProps,
-      "props",
-      Headline.name
-    );
+    const propsErr = checkProps(Headline, expectedProps);
     expect(propsErr).toBeUndefined();
   });
 });
