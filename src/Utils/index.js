@@ -4,6 +4,9 @@
 //다른 개발자가 봤을 때 이해되지 않을 수도 있기에 차별화하기 위해 className 대신 사용
 
 import checkPropTypes from "check-prop-types";
+import { applyMiddleware, createStore } from "redux";
+import rootReducer from "../reducers/index";
+import { middlewares } from "../createStore";
 
 export const findByTestAtrr = (component, attr) => {
   const wrapper = compoenent.find(`[data-test='${attr}]`);
@@ -13,7 +16,7 @@ export const findByTestAtrr = (component, attr) => {
 //shallow함수를 다르게 사용하는 법
 
 const setUp = (props = {}) => {
-  const component = shallow(<Heder {...props} />);
+  const component = shallow(<Header {...props} />);
   return component;
 };
 
@@ -25,4 +28,11 @@ export const checkProps = (component, expectedProps) => {
     component.name
   );
   return propsErr;
+};
+
+export const testStore = (initialState) => {
+  const createStoreWithMiddleware = applyMiddleware(...middlewares)(
+    createStore
+  );
+  return createStoreWithMiddleware(rootReducer, initialState);
 };
